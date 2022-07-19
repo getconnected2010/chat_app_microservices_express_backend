@@ -3,7 +3,10 @@ const router = express.Router()
 const UC = require('../controllers/userController')
 const VAL = require('../utilities/validator')
 const PASS = require('../utilities/password')
+const JWT = require('../utilities/jwtUtil')
 
+//activate new user from emailed token route
+router.get('/activate/:token', JWT.verifyUsernameEmail, UC.activate)
 //login route
 router.post('/login', VAL.username, VAL.password, VAL.validatorResult, UC.login)
 
